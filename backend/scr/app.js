@@ -1,9 +1,8 @@
-import express, { response } from "express"
+import express from "express";
+const app = express();
 
-const app = express()
-
-app.get("/", (req, res)=>{
-    res.send("SRXit backend is live")
+app.get("/" , (req , res ) =>{
+    res.send("hello Xet");
 })
 
-app.listen(3000)
+app.listen(3000);
