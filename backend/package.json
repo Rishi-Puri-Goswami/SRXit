@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // {
 //   "name": "srxit_backend",
 //   "version": "1.0.0",
@@ -18,3 +19,25 @@
 //     "nodemon": "^3.1.9"
 //   }
 // }
+=======
+{
+  "name": "srxit_backend",
+  "version": "1.0.0",
+  "description": "backend for SRXit",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+"dev": "nodemon scr/app.js"
+ },
+  "author": "sahil, rishi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.0",
+    "nodemon": "^3.1.9"
+  }
+}
+>>>>>>> 997844afb27e8405a7195f76e67543f18807fa25
