@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dbconnect from "./db/databseConnect";
+import dbconnect from "./db/databseConnect.js";
 const app = express();
 
 // app.use(cors({
@@ -13,7 +13,7 @@ dbconnect()
         console.log(`server is not talking:- ${error}`);
         throw error
     })
-    app.listen(process.env.PORT || 8000,()=>{
+    app.listen(process.env.PORT || 4000,()=>{
         console.log(`⚙️ server running on port ${process.env.PORT}`, );
     })
 

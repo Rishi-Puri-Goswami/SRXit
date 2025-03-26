@@ -5,8 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/app.js"
-  },
+"dev": "nodemon -r dotenv/config --experimental-json-modules scr/app.js"
+ },
   "author": "sahil, rishi",
   "license": "ISC",
   "dependencies": {
