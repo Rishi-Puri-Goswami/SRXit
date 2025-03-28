@@ -21,6 +21,14 @@ dbconnect()
     });
 })
 
+
+
+//import routes
+
+import UseRoute from"./routes/studentRoutes.js"
+
+app.get("/user" , UseRoute );
+
 app.get("/", (req, res) => {
     res.send("hello Xet");
 });
