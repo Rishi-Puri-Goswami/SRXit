@@ -1,7 +1,7 @@
 import moo from "mongoose" //"moo" for cowsay
-const studentSchema = moo.Schema(
+const studentSchema = new moo.Schema(
     {
-        Name:{
+        name:{
             type: String,
             required: true
         },
@@ -31,7 +31,7 @@ const studentSchema = moo.Schema(
             type: String,
             required: true
         },
-        wardenName:{
+        wardenname:{
             type: String, default: "nothing"
         },
         destination:{
