@@ -1,6 +1,10 @@
-const registerstudent = async (req, res) => {
-    res.send(
-        console.log("mu me lele"))
-};
 
-export { registerstudent };
+const registerstudent= async (req , res ) => {
+
+res.status(200).json({
+    message : "ok"
+})
+
+} 
+
+export {registerstudent}
