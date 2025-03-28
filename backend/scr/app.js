@@ -21,10 +21,10 @@ dbconnect()
         console.error(`Error from app.js:::-> ${error}`);
     });
 
-// Import routes
-app.post("/user", UseRoute);
 
-// Root route
+app.use("/user", UseRoute );
+
+
 app.get("/", (req, res) => {
     res.send("hello Xet");
 });
