@@ -1,8 +1,8 @@
 import mongoose from "mongoose"
 import dotenv , {config} from "dotenv"
-// dotenv.config({
-//     path:'./.env'
-// })
+dotenv.config({
+    path:'./.env'
+})
 const dbname = "srxit"
 const dbconnect = async ()=>{
     try {

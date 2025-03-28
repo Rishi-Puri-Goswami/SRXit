@@ -13,7 +13,7 @@ const App = () => {
 <BrowserRouter>
 
 <Routes>
-  <Route  path='/register' element={<UserRegisterPage  />} />
+  <Route  path='/user/register' element={<UserRegisterPage  />} />
 </Routes>
 
 </BrowserRouter>
