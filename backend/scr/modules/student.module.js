@@ -46,7 +46,7 @@ const studentSchema = moo.Schema(
         // },
     },
     {
-        timestanps: true
+        timestamps: true
     })
 
 export const Student = moo.model("Student", studentSchema)
