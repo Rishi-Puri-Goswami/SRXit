@@ -1,4 +1,4 @@
-import moo from "mongoose"
+import moo from "mongoose" //"moo" for cowsay
 const studentSchema = moo.Schema(
     {
         Name:{
