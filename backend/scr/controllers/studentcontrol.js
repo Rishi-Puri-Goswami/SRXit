@@ -2,7 +2,7 @@
 const registerstudent= async (req , res ) => {
 
 res.status(200).json({
-    message : "ok"
+    message : "Its workiggggggggg"
 })
 
 } 
