@@ -8,7 +8,10 @@ const App = () => {
   return (
     <div>
 
+
+
 <BrowserRouter>
+
 <Routes>
   <Route  path='/register' element={<UserRegisterPage  />} />
 </Routes>
