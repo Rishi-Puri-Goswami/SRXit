@@ -1,6 +1,5 @@
 import React from 'react'
 import UserRegisterPage from './components/UserRegisterPage';
-
 import {BrowserRouter , Routes, Route} from "react-router-dom";
 
 const App = () => {

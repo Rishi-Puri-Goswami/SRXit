@@ -1,63 +1,63 @@
-import moo from "mongoose" //"moo" for cowsay
-const studentSchema = new moo.Schema(
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const studentSchema = new mongoose.Schema(
     {
-        name:{
+        name: {
             type: String,
             required: true
         },
-        phoneNo:{
+        phoneNo: {
             type: String,
             required: true,
             unique: true,
             index: true
         },
-        collageYear:{
+        collageYear: {
             type: Number,
             required: true
         },
-        roomNo:{
+        roomNo: {
             type: Number,
             required: true
         },
-        parentNo:{
+        email: {
             type: String,
             required: true
         },
-        email:{
+        password: {
             type: String,
             required: true
         },
-        password:{
+        wardenname: {
             type: String,
-            required: true
+            default: "nothing"
         },
-        wardenname:{
-            type: String, default: "nothing"
+        destination: {
+            type: String,
+            default: "nothing"
         },
-        destination:{
-            type: String, default: "nothing"
-        },
-        status:{
-            type: String, default: "nowhere"
-        },
-        // role:{
-        //     type: String, enum: ["student", "warden", "gatekeeper"],
-        //     required: true
-        // },
+        status: {
+            type: String,
+            default: "nowhere"
+        }
     },
     {
         timestamps: true
-    })
+    }
+);
 
-export const Student = moo.model("Student", studentSchema)
+// Hash password before saving
+studentSchema.pre("save", async function (next) {
+    if (!this.isModified("password")) return next();
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+});
 
-/*
-name
-phonenumber
-collage year
-room number
-parentsNo
-your email
-password
-confirm password
-*/
+// Compare passwords
+studentSchema.methods.isPasswordCorrect = async function (password) {
+    return await bcrypt.compare(password, this.password);
+};
+
+export const Student = mongoose.model("Student", studentSchema);

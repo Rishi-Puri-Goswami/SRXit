@@ -1,32 +1,28 @@
 import React, { useState } from 'react'
 
-
 const UserRegisterPage = () => {
 
-
   const [name, setName] = useState("")
-  const [phone, setPhone] = useState("")
+  const [phoneNo, setPhoneNo] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [confoPassword, setConfoPassword] = useState("")
-  const [year, setYear] = useState("")
-  const [roomno, setRoomno] = useState("")
+  const [collageYear, setCollageYear] = useState("")
+  const [roomNo, setRoomNo] = useState("")
   const [formerror, setFormerror] = useState("")
+  const [error, setError] = useState("")
 
-
-
-  const SubmitHandler = (e) => {
+  const SubmitHandler = async (e) => {
 
     e.preventDefault();
 
-
-    if (phone.length != 14) {
-      setFormerror("Please enter a valid 10-digit phone number");
+    if (phoneNo.length != 14) {
+      setFormerror("Please enter a valid 10-digit phoneNo number");
       return
     }
 
-    if (!["1", "2", "3", "4"].includes(year)) {
-      setFormerror("Please enter a valid college year");
+    if (!["1", "2", "3", "4"].includes(collageYear)) {
+      setFormerror("Please enter a valid college collageYear");
       return
     }
 
@@ -34,11 +30,16 @@ const UserRegisterPage = () => {
       setFormerror("Password must be at least 8 characters long");
       return
     }
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format." });
+    }
 
     if (!(/[!@#$%^&*(){}":?><]/.test(password))) {
       setFormerror("Password must contain a special character (e.g., !@#$%^&*'?)");
       return
     }
+
     if (!(/[1234567890]/.test(password))) {
       setFormerror("Password must contain a number");
       return
@@ -49,24 +50,56 @@ const UserRegisterPage = () => {
       return
     }
 
-    setName("");
-    setPhone("");
-    setEmail("");
-    setPassword("");
-    setConfoPassword("");
-    setYear("");
-    setRoomno("");
-    setFormerror("");
+    try {
+
+      const studentdata = { name, phoneNo, email, password, confoPassword, collageYear, roomNo }
+      const response = await fetch("http://localhost:4000/user/register", {
+        method: "POST",
+        body: JSON.stringify(studentdata),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include"
+      })
+
+      const result = await response.json()
+      if (!response) {
+        console.log(result.error);
+        setError(result.message);
+
+      }
+      if (response) {
+        console.log(result);
+
+        if (result.message) {
+          alert(`${result.message}`)
+          
+        }
+
+        setName("");
+        setPhoneNo("");
+        setEmail("");
+        setPassword("");
+        setConfoPassword("");
+        setCollageYear("");
+        setRoomNo("");
+        setFormerror("")
+
+      }
+ 
+
+    } catch (error) {
+      console.log(error.message);
+    }
 
     console.log(name);
-    console.log(phone);
+    console.log(phoneNo);
     console.log(password);
     console.log(confoPassword);
-    console.log(year);
-    console.log(roomno);
+    console.log(collageYear);
+    console.log(roomNo);
 
   }
-
 
 
   return (
@@ -89,36 +122,35 @@ const UserRegisterPage = () => {
                 </div>
                 <div>
                   <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Phone no.
+                    phoneNo no.
                   </label>
                   <input
                     onChange={(e) => {
 
                       const inputValue = e.target.value;
                       if (inputValue.startsWith("+91 ")) {
-                        setPhone(inputValue);
+                        setPhoneNo(inputValue);
                       } else {
-                        setPhone("+91 " + inputValue.replace("+91", ""));
+                        setPhoneNo("+91 " + inputValue.replace("+91", ""));
                       }
                     }}
-                    value={phone}
+                    value={phoneNo}
                     maxLength={14}
                     type="tel"
-                    name="phone"
+                    name="phoneNo"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Enter Your Number"
                     required
                   />
                 </div>
 
-
                 <div>
-                  <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Collage Year</label>
-                  <input type="Number" onChange={(e) => setYear(e.target.value)} value={year} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your collage year" required />
+                  <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Collage collageYear</label>
+                  <input type="Number" onChange={(e) => setCollageYear(e.target.value)} value={collageYear} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your collage collageYear" required />
                 </div>
                 <div>
                   <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Room Number</label>
-                  <input type="Number" onChange={(e) => setRoomno(e.target.value)} value={roomno} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Hostel Room Number" required />
+                  <input type="Number" onChange={(e) => setRoomNo(e.target.value)} value={roomNo} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Hostel Room Number" required />
                 </div>
 
                 <div>
@@ -157,5 +189,6 @@ const UserRegisterPage = () => {
     </>
   )
 }
+
 
 export default UserRegisterPage
