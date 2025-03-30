@@ -19,10 +19,10 @@ const studentSchema = new moo.Schema(
             type: Number,
             required: true
         },
-        parentNo:{
-            type: String,
-            required: true
-        },
+        // parentNo:{
+        //     type: String,
+        //     required: true
+        // },
         email:{
             type: String,
             required: true
