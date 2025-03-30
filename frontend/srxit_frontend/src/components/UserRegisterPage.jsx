@@ -39,6 +39,7 @@ const UserRegisterPage = () => {
       setFormerror("Password must contain a special character (e.g., !@#$%^&*'?)");
       return
     }
+
     if (!(/[1234567890]/.test(password))) {
       setFormerror("Password must contain a number");
       return
@@ -188,5 +189,6 @@ const UserRegisterPage = () => {
     </>
   )
 }
+
 
 export default UserRegisterPage
