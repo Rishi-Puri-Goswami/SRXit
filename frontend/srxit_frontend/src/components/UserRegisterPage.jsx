@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { LuEyeClosed } from "react-icons/lu";
+import { LuEye } from "react-icons/lu";
 
 const UserRegisterPage = () => {
 
@@ -11,7 +13,9 @@ const UserRegisterPage = () => {
   const [roomNo, setRoomNo] = useState("")
   const [formerror, setFormerror] = useState("")
   const [error, setError] = useState("")
-
+  const [showhide, setShowhide] = useState(true)
+  const [passwordchange, setPasswordchange] = useState(true)
+  
   const SubmitHandler = async (e) => {
 
     e.preventDefault();
@@ -101,6 +105,16 @@ const UserRegisterPage = () => {
 
   }
 
+  const showpass = (e)=>{
+      setShowhide(!showhide)
+      setPasswordchange(!passwordchange)
+      console.log("not set working");
+      setTimeout(() => {
+      setShowhide(true)
+      setPasswordchange(true)
+      console.log("set working");      
+      }, 2000);
+  }
 
   return (
     <>
@@ -118,7 +132,7 @@ const UserRegisterPage = () => {
               <form className="space-y-4 md:space-y-6" onSubmit={SubmitHandler} action="#">
                 <div>
                   <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                  <input onChange={(e) => setName(e.target.value)} value={name} type="text" name="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name" required />
+                  <input onChange={(e) => setName(e.target.value)} value={name} type="text" name="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" placeholder="name" required />
                 </div>
                 <div>
                   <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -138,7 +152,7 @@ const UserRegisterPage = () => {
                     maxLength={14}
                     type="tel"
                     name="phoneNo"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
                     placeholder="Enter Your Number"
                     required
                   />
@@ -146,24 +160,35 @@ const UserRegisterPage = () => {
 
                 <div>
                   <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Collage collageYear</label>
-                  <input type="Number" onChange={(e) => setCollageYear(e.target.value)} value={collageYear} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter your collage collageYear" required />
+                  <input type="Number" onChange={(e) => setCollageYear(e.target.value)} value={collageYear} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" placeholder="Enter your collage collageYear" required />
                 </div>
                 <div>
                   <label htmlFor="Number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Room Number</label>
-                  <input type="Number" onChange={(e) => setRoomNo(e.target.value)} value={roomNo} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter Your Hostel Room Number" required />
+                  <input type="Number" onChange={(e) => setRoomNo(e.target.value)} value={roomNo} name="Number" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" placeholder="Enter Your Hostel Room Number" required />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                  <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="user@gmail.com" required />
+                  <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" placeholder="user@gmail.com" required />
                 </div>
+                
                 <div>
+
+
                   <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                  <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                 <div>
+                  <div className='flex items-center bg-gray-50 border  border-gray-300 dark:bg-gray-700 rounded-lg dark:border-gray-600' >
+                  <input type={passwordchange ? "password": "text"} onChange={(e) => setPassword(e.target.value)} value={password} name="password" id="password" placeholder="Enter your Password" className="  text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" required />
+                  <div className='scale-150 ml-6 mr-5 ' onClick={showpass}>{showhide ? <LuEyeClosed color='grey'/>: <LuEye color='grey'/>}</div>
+                  </div>
+                  </div>
+
                 </div>
+
+
                 <div>
                   <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
-                  <input type="password" onChange={(e) => setConfoPassword(e.target.value)} value={confoPassword} name="confirm-password" id="confirm-password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                  <input type="password" onChange={(e) => setConfoPassword(e.target.value)} value={confoPassword} name="confirm-password" id="confirm-password" placeholder="Conforn your password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none" required />
                 </div>
 
                 {formerror && (<p className='w-full h-6  text-red-600 text-sm '>{formerror}</p>)}
@@ -176,7 +201,7 @@ const UserRegisterPage = () => {
                     <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                   </div>
                 </div>
-                <button type="submit" className="w-full bg-slate-600 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+                <button type="submit" className="w-full bg-slate-600 text-white bg-primary-600 hover:bg-slate-700 hover:scale-103 shadow-xl shadow-black-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800  ">Create an account</button> 
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
                 </p>
@@ -192,3 +217,6 @@ const UserRegisterPage = () => {
 
 
 export default UserRegisterPage
+
+
+// will add skew later to tilt every form
