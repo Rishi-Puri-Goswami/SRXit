@@ -75,7 +75,7 @@ const UserRegisterPage = () => {
           alert(`${result.message}`)
           
         }
-
+           
         setName("");
         setPhoneNo("");
         setEmail("");

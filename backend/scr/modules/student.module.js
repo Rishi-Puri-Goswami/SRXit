@@ -41,6 +41,10 @@ const studentSchema = new mongoose.Schema(
         status: {
             type: String,
             default: "nowhere"
+        },
+        refreshtoken :{
+            type : String
+
         }
     },
     {
@@ -59,5 +63,29 @@ studentSchema.pre("save", async function (next) {
 studentSchema.methods.isPasswordCorrect = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
+
+//generateAccessToken
+studentSchema.method.GenerateAccessToken = function (){
+    jwt.sign({
+        _id: this._id,
+        name : this.name,
+        phoneNo: this.phoneNo,
+        collageYear : this.collageYear,
+        roomNo : this.roomNo
+    }, process.env.ACCESS_TOKEN_SECRET , process.env.ACCESS_TOKEN_EXPIRE
+
+)
+}
+
+//GenerateRefressToken
+studentSchema.method.GenerateRefressToken = function (){
+
+    jwt.sign({
+        _id: this._id
+    },process.env.REFRESS_TOKEN_SECRET ,
+    process.env.REFRESS_TOKEN_EXPIRE
+)
+
+}
 
 export const Student = mongoose.model("Student", studentSchema);
